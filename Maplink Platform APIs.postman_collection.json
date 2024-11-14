@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4d2b4c42-67aa-40e2-9c76-25df232a7eb8",
+		"_postman_id": "a301e736-958f-43f8-a0e0-010f71bdc653",
 		"name": "Maplink Platform APIs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "15639997"
@@ -19,7 +19,8 @@
 									"var jsonData = JSON.parse(responseBody);\r",
 									"postman.setGlobalVariable(\"matrixjobid\", jsonData.id);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -38,8 +39,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
@@ -84,7 +84,6 @@
 						"header": [
 							{
 								"key": "",
-								"name": "Content-Type",
 								"value": "",
 								"type": "text"
 							},
@@ -195,9 +194,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -238,9 +236,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -281,9 +278,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -322,9 +318,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -369,7 +364,152 @@
 			]
 		},
 		{
-			"name": "Geocode",
+			"name": "Geocode V2",
+			"item": [
+				{
+					"name": "Suggestions (Autocomplete)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/geocode/v2/suggestions?q=Alameda Campinas,São Paulo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"geocode",
+								"v2",
+								"suggestions"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Alameda Campinas,São Paulo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Geocode",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"road\": \"R. Menina Rosana\",\n    \"number\": 70,\n    \"city\": \"Itajaí\",\n    \"state\": \"SC\",\n    \"zipcode\": \"88304250\" \n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/geocode/v2/geocode",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"geocode",
+								"v2",
+								"geocode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reverse Geocode",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{currentAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"L1\",\n        \"lat\": -26.90314282963394,\n        \"lon\": -48.68018153051618,\n        \"distance\": 500\n    },\n    {\n        \"id\": \"L2\",\n        \"lat\": -26.908620508271895,\n        \"lon\": -48.67848497677373\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/geocode/v2/reverse",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"geocode",
+								"v2",
+								"reverse"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Geocode V1",
 			"item": [
 				{
 					"name": "Suggestions (Autocomplete)",
@@ -611,7 +751,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -621,7 +762,8 @@
 									"var jsonData = JSON.parse(responseBody);\r",
 									"postman.setGlobalVariable(\"planningjobid\", jsonData.id);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -651,7 +793,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"optimizationProfile\": \"BRAZIL46\",\r\n    \"tripsProfile\": \"MAPLINK\",\r\n    \"startDate\": 1671516600000,\r\n    \"legislationProfiles\": [\r\n        {\r\n            \"name\": \"DEFAULT\"\r\n        }\r\n    ],\r\n    \"logisticConstraints\": [\r\n        {\r\n            \"name\": \"P1Pickup\",\r\n            \"siteLoadingFixedTime\": 900\r\n        },\r\n        {\r\n            \"name\": \"P1Delivery\",\r\n            \"siteUnloadingFixedTime\": 600\r\n        }\r\n    ],\r\n    \"products\": [\r\n        {\r\n            \"name\": \"DEFAULT\"\r\n        }\r\n    ],\r\n    \"sites\": [\r\n        {\r\n            \"name\": \"Cliente1\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.507608,\r\n                \"longitude\": -46.587145\r\n            },\r\n            \"logisticConstraints\": \"P1Delivery\"\r\n        },\r\n        {\r\n            \"name\": \"Cliente2\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.621059,\r\n                \"longitude\": -46.756193\r\n            },\r\n            \"logisticConstraints\": \"P1Delivery\"\r\n        }\r\n    ],\r\n    \"depots\": [\r\n        {\r\n            \"name\": \"CD\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.503939,\r\n                \"longitude\": -46.498419\r\n            },\r\n            \"logisticConstraints\": \"P1Pickup\"\r\n        }\r\n    ],\r\n    \"vehicleTypes\": [\r\n        {\r\n            \"name\": \"VUC\",\r\n            \"maxVolume\": 20,\r\n            \"maxWeight\": 1200,\r\n            \"size\": 1\r\n        }\r\n    ],\r\n    \"vehicles\": [\r\n        {\r\n            \"name\": \"VUC_1\",\r\n            \"vehicleType\": \"VUC\",\r\n            \"legislationProfile\": \"DEFAULT\",\r\n            \"availablePeriods\": [\r\n                {\r\n                    \"departureSite\": \"CD\",\r\n                    \"arrivalSite\": \"CD\",\r\n                    \"timeWindow\": {\r\n                        \"start\": 1671519600000,\r\n                        \"end\": 1671562800000\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"operations\": [\r\n        {\r\n            \"id\": \"P1\",\r\n            \"weight\": 100,\r\n            \"volume\": 2,\r\n            \"product\": \"DEFAULT\",\r\n            \"type\": \"DELIVERY\",\r\n            \"depotSite\": \"CD\",\r\n            \"customerSite\": \"Cliente1\",\r\n            \"customerTimeWindows\": [\r\n                {\r\n                    \"start\": 1671523200000,\r\n                    \"end\": 1671537600000\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"P2\",\r\n            \"weight\": 250,\r\n            \"volume\": 5,\r\n            \"product\": \"DEFAULT\",\r\n            \"type\": \"DELIVERY\",\r\n            \"depotSite\": \"CD\",\r\n            \"customerSite\": \"Cliente2\",\r\n            \"customerTimeWindows\": [\r\n                {\r\n                    \"start\": 1671523200000,\r\n                    \"end\": 1671537600000\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
+							"raw": "{\r\n    \"optimizationProfile\": \"BRAZIL46\",\r\n    \"tripsProfile\": \"MAPLINKBR\",\r\n    \"startDate\": 1671516600000,\r\n    \"legislationProfiles\": [\r\n        {\r\n            \"name\": \"DEFAULT\"\r\n        }\r\n    ],\r\n    \"logisticConstraints\": [\r\n        {\r\n            \"name\": \"P1Pickup\",\r\n            \"siteLoadingFixedTime\": 900\r\n        },\r\n        {\r\n            \"name\": \"P1Delivery\",\r\n            \"siteUnloadingFixedTime\": 600\r\n        }\r\n    ],\r\n    \"products\": [\r\n        {\r\n            \"name\": \"DEFAULT\"\r\n        }\r\n    ],\r\n    \"sites\": [\r\n        {\r\n            \"name\": \"Cliente1\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.507608,\r\n                \"longitude\": -46.587145\r\n            },\r\n            \"logisticConstraints\": \"P1Delivery\"\r\n        },\r\n        {\r\n            \"name\": \"Cliente2\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.621059,\r\n                \"longitude\": -46.756193\r\n            },\r\n            \"logisticConstraints\": \"P1Delivery\"\r\n        }\r\n    ],\r\n    \"depots\": [\r\n        {\r\n            \"name\": \"CD\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.503939,\r\n                \"longitude\": -46.498419\r\n            },\r\n            \"logisticConstraints\": \"P1Pickup\"\r\n        }\r\n    ],\r\n    \"vehicleTypes\": [\r\n        {\r\n            \"name\": \"VUC\",\r\n            \"maxVolume\": 20,\r\n            \"maxWeight\": 1200,\r\n            \"size\": 1\r\n        }\r\n    ],\r\n    \"vehicles\": [\r\n        {\r\n            \"name\": \"VUC_1\",\r\n            \"vehicleType\": \"VUC\",\r\n            \"legislationProfile\": \"DEFAULT\",\r\n            \"availablePeriods\": [\r\n                {\r\n                    \"departureSite\": \"CD\",\r\n                    \"arrivalSite\": \"CD\",\r\n                    \"timeWindow\": {\r\n                        \"start\": 1671519600000,\r\n                        \"end\": 1671562800000\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"operations\": [\r\n        {\r\n            \"id\": \"P1\",\r\n            \"weight\": 100,\r\n            \"volume\": 2,\r\n            \"product\": \"DEFAULT\",\r\n            \"type\": \"DELIVERY\",\r\n            \"depotSite\": \"CD\",\r\n            \"customerSite\": \"Cliente1\",\r\n            \"customerTimeWindows\": [\r\n                {\r\n                    \"start\": 1671523200000,\r\n                    \"end\": 1671537600000\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"P2\",\r\n            \"weight\": 250,\r\n            \"volume\": 5,\r\n            \"product\": \"DEFAULT\",\r\n            \"type\": \"DELIVERY\",\r\n            \"depotSite\": \"CD\",\r\n            \"customerSite\": \"Cliente2\",\r\n            \"customerTimeWindows\": [\r\n                {\r\n                    \"start\": 1671523200000,\r\n                    \"end\": 1671537600000\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/planning/v1/problems",
@@ -676,7 +818,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -686,7 +829,8 @@
 									"var jsonData = JSON.parse(responseBody);\r",
 									"postman.setGlobalVariable(\"planningjobid\", jsonData.id);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -716,7 +860,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"calculationMode\": \"THE_FASTEST\",\r\n    \"optimizationProfile\": \"BRAZIL46\",\r\n    \"tripsProfile\": \"MAPLINK\",\r\n    \"startDate\": 1513750219000,\r\n    \"legislationProfiles\": [\r\n        {\r\n            \"name\": \"DEFAULT\"\r\n        }\r\n    ],\r\n    \"logisticConstraints\": [\r\n        {\r\n            \"name\": \"P1Pickup\",\r\n            \"siteLoadingFixedTime\": 900\r\n        },\r\n        {\r\n            \"name\": \"P1Delivery\",\r\n            \"siteUnloadingFixedTime\": 600\r\n        }\r\n    ],\r\n    \"products\": [\r\n        {\r\n            \"name\": \"DEFAULT\"\r\n        }\r\n    ],\r\n    \"sites\": [\r\n        {\r\n            \"name\": \"Cliente1\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.507608,\r\n                \"longitude\": -46.587145\r\n            },\r\n            \"logisticConstraints\": \"P1Delivery\"\r\n        },\r\n        {\r\n            \"name\": \"Cliente2\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.621059,\r\n                \"longitude\": -46.756193\r\n            },\r\n            \"logisticConstraints\": \"P1Delivery\"\r\n        }\r\n    ],\r\n    \"depots\": [\r\n        {\r\n            \"name\": \"CD\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.503939,\r\n                \"longitude\": -46.498419\r\n            },\r\n            \"logisticConstraints\": \"P1Pickup\"\r\n        }\r\n    ],\r\n    \"vehicleTypes\": [\r\n        {\r\n            \"name\": \"VUC\",\r\n            \"maxVolume\": 20,\r\n            \"maxWeight\": 1200,\r\n            \"size\": 1\r\n        }\r\n    ],\r\n    \"vehicles\": [\r\n        {\r\n            \"name\": \"VUC_1\",\r\n            \"vehicleType\": \"VUC\",\r\n            \"legislationProfile\": \"DEFAULT\",\r\n            \"availablePeriods\": [\r\n                {\r\n                    \"departureSite\": \"CD\",\r\n                    \"arrivalSite\": \"CD\",\r\n                    \"timeWindow\": {\r\n                        \"start\": 1513753200000,\r\n                        \"end\": 1513796400000\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"operations\": [\r\n        {\r\n            \"id\": \"P1\",\r\n            \"weight\": 100,\r\n            \"volume\": 2,\r\n            \"product\": \"DEFAULT\",\r\n            \"type\": \"DELIVERY\",\r\n            \"depotSite\": \"CD\",\r\n            \"customerSite\": \"Cliente1\",\r\n            \"customerTimeWindows\": [\r\n                {\r\n                    \"start\": 1513756800000,\r\n                    \"end\": 1513771200000\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"P2\",\r\n            \"weight\": 250,\r\n            \"volume\": 5,\r\n            \"product\": \"DEFAULT\",\r\n            \"type\": \"DELIVERY\",\r\n            \"depotSite\": \"CD\",\r\n            \"customerSite\": \"Cliente2\",\r\n            \"customerTimeWindows\": [\r\n                {\r\n                    \"start\": 1513756800000,\r\n                    \"end\": 1513771200000\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
+							"raw": "{\r\n    \"calculationMode\": \"THE_FASTEST\",\r\n    \"optimizationProfile\": \"BRAZIL46\",\r\n    \"tripsProfile\": \"MAPLINKBR\",\r\n    \"startDate\": 1513750219000,\r\n    \"legislationProfiles\": [\r\n        {\r\n            \"name\": \"DEFAULT\"\r\n        }\r\n    ],\r\n    \"logisticConstraints\": [\r\n        {\r\n            \"name\": \"P1Pickup\",\r\n            \"siteLoadingFixedTime\": 900\r\n        },\r\n        {\r\n            \"name\": \"P1Delivery\",\r\n            \"siteUnloadingFixedTime\": 600\r\n        }\r\n    ],\r\n    \"products\": [\r\n        {\r\n            \"name\": \"DEFAULT\"\r\n        }\r\n    ],\r\n    \"sites\": [\r\n        {\r\n            \"name\": \"Cliente1\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.507608,\r\n                \"longitude\": -46.587145\r\n            },\r\n            \"logisticConstraints\": \"P1Delivery\"\r\n        },\r\n        {\r\n            \"name\": \"Cliente2\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.621059,\r\n                \"longitude\": -46.756193\r\n            },\r\n            \"logisticConstraints\": \"P1Delivery\"\r\n        }\r\n    ],\r\n    \"depots\": [\r\n        {\r\n            \"name\": \"CD\",\r\n            \"coordinates\": {\r\n                \"latitude\": -23.503939,\r\n                \"longitude\": -46.498419\r\n            },\r\n            \"logisticConstraints\": \"P1Pickup\"\r\n        }\r\n    ],\r\n    \"vehicleTypes\": [\r\n        {\r\n            \"name\": \"VUC\",\r\n            \"maxVolume\": 20,\r\n            \"maxWeight\": 1200,\r\n            \"size\": 1\r\n        }\r\n    ],\r\n    \"vehicles\": [\r\n        {\r\n            \"name\": \"VUC_1\",\r\n            \"vehicleType\": \"VUC\",\r\n            \"legislationProfile\": \"DEFAULT\",\r\n            \"availablePeriods\": [\r\n                {\r\n                    \"departureSite\": \"CD\",\r\n                    \"arrivalSite\": \"CD\",\r\n                    \"timeWindow\": {\r\n                        \"start\": 1513753200000,\r\n                        \"end\": 1513796400000\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"operations\": [\r\n        {\r\n            \"id\": \"P1\",\r\n            \"weight\": 100,\r\n            \"volume\": 2,\r\n            \"product\": \"DEFAULT\",\r\n            \"type\": \"DELIVERY\",\r\n            \"depotSite\": \"CD\",\r\n            \"customerSite\": \"Cliente1\",\r\n            \"customerTimeWindows\": [\r\n                {\r\n                    \"start\": 1513756800000,\r\n                    \"end\": 1513771200000\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"id\": \"P2\",\r\n            \"weight\": 250,\r\n            \"volume\": 5,\r\n            \"product\": \"DEFAULT\",\r\n            \"type\": \"DELIVERY\",\r\n            \"depotSite\": \"CD\",\r\n            \"customerSite\": \"Cliente2\",\r\n            \"customerTimeWindows\": [\r\n                {\r\n                    \"start\": 1513756800000,\r\n                    \"end\": 1513771200000\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/planning/v1/problems",
@@ -842,7 +986,8 @@
 									"var jsonData = JSON.parse(responseBody);\r",
 									"postman.setGlobalVariable(\"tripjobid\", jsonData.id);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -866,7 +1011,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"calculationMode\": \"THE_FASTEST\",\n    \"points\": [\n        {\n            \"siteId\": \"Point 1-Extrema\",\n            \"latitude\": -22.859246,\n            \"longitude\": -46.339289\n        },\n        {\n            \"siteId\": \"Point 2-Betim\",\n            \"latitude\": -19.985117,\n            \"longitude\": -44.202667\n        }\n    ]    \n}"
+							"raw": "{\n    \"calculationMode\": \"THE_FASTEST\",\n    \"points\": [\n        {\n            \"siteId\": \"Point 1-Extrema\",\n            \"latitude\": -22.859246,\n            \"longitude\": -46.339289\n        },\n        {\n            \"siteId\": \"Point 2-Betim\",\n            \"latitude\": -19.985117,\n            \"longitude\": -44.202667\n        }\n    ],\n    \"turnByTurn\":{\n        \"language\":\"en\"\n    }\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/trip/v2/calculations?pointsMode=polyline",
@@ -1089,56 +1234,6 @@
 					"response": []
 				},
 				{
-					"name": "send problem Trip + CO2",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"postman.setGlobalVariable(\"tripjobid\", jsonData.id);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{currentAccessToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"calculationMode\": \"THE_FASTEST\",\n    \"points\": [\n        {\n            \"latitude\": -20.46326264290572,\n            \"longitude\": -54.612264694166356,\n            \"siteId\": \"Point 1-Campo Grande-MS\"\n        },\n        {\n            \"latitude\": -22.907660731374474,\n            \"longitude\": -43.18378983504734,\n            \"siteId\": \"Point 2-Rio de Janeiro-RJ\"\n        }\n    ],\n    \"emission\": {\n        \"source\": \"GHG_PROTOCOL\",\n        \"fuelType\": \"BR_GASOLINE\",\n        \"averageConsumption\": 3.7,\n        \"fuelPrice\": 4.9\n    }\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/trip/v1/problems",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"trip",
-								"v1",
-								"problems"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "send problem Trip + Route Storage",
 					"event": [
 						{
@@ -1305,9 +1400,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1350,9 +1444,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1396,9 +1489,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1419,52 +1511,6 @@
 								{
 									"key": "vehicleType",
 									"value": "CAR"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get tolls + CO2",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{currentAccessToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    //Maplink APIs params\r\n      \"maplink\": {\r\n        \"emission\": {\r\n            \"source\": \"GHG_PROTOCOL\",\r\n            \"fuelType\": \"BR_GASOLINE\",\r\n            \"averageConsumption\": 3.7,\r\n            \"fuelPrice\": 4.9\r\n        }\r\n    },\r\n    //Directions API response\r\n    \"geocoded_waypoints\": [\r\n        {\r\n            \"geocoder_status\": \"OK\",\r\n            \"place_id\": \"ChIJ0WGkg4FEzpQRrlsz_whLqZs\",\r\n            \"types\": [\r\n                \"locality\",\r\n                \"political\"\r\n            ]\r\n        },\r\n        {\r\n            \"geocoder_status\": \"OK\",\r\n            \"place_id\": \"ChIJ___DXtVZzpQR0sG2q6CMVjE\",\r\n            \"types\": [\r\n                \"street_address\"\r\n            ]\r\n        },\r\n        {\r\n            \"geocoder_status\": \"OK\",\r\n            \"place_id\": \"ChIJi1C37F_xuJQRhrBJ2jW-rr0\",\r\n            \"types\": [\r\n                \"locality\",\r\n                \"political\"\r\n            ]\r\n        }\r\n    ],\r\n    \"routes\": [\r\n        {\r\n            \"bounds\": {\r\n                \"northeast\": {\r\n                    \"lat\": -21.7742912,\r\n                    \"lng\": -46.6395557\r\n                },\r\n                \"southwest\": {\r\n                    \"lat\": -23.5717569,\r\n                    \"lng\": -48.1792643\r\n                }\r\n            },\r\n            \"copyrights\": \"Map data ©2021 Google\",\r\n            \"legs\": [\r\n                {\r\n                    \"distance\": {\r\n                        \"text\": \"285 km\",\r\n                        \"value\": 284827\r\n                    },\r\n                    \"duration\": {\r\n                        \"text\": \"3 hours 38 mins\",\r\n                        \"value\": 13108\r\n                    },\r\n                    \"end_address\": \"Araraquara, State of São Paulo, Brazil\",\r\n                    \"end_location\": {\r\n                        \"lat\": -21.7790843,\r\n                        \"lng\": -48.1792643\r\n                    },\r\n                    \"start_address\": \"São Paulo, State of São Paulo, Brazil\",\r\n                    \"start_location\": {\r\n                        \"lat\": -23.5557608,\r\n                        \"lng\": -46.6395557\r\n                    },\r\n                    \"steps\": [\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"1.0 km\",\r\n                                \"value\": 1043\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 78\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5502834,\r\n                                \"lng\": -46.6464751\r\n                            },\r\n                            \"html_instructions\": \"Head <b>west</b> on <b>Viaduto Júlio de Mesquita Filho</b>\",\r\n                            \"polyline\": {\r\n                                \"points\": \"nvwnCfht{G?FMxAMzAGh@It@G~@IfAGd@CP?@C\\\\CJAJERCFAHCFAHCFAHCFCFCHAFADADADADEPSt@]jAi@nBGTKVQ\\\\OT[`@_@\\\\]TSLOFQFIBYJA?{A`@uDdAoBh@i@Ng@Na@J_@J_@HWDYDMB\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5557608,\r\n                                \"lng\": -46.6395557\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"77 m\",\r\n                                \"value\": 77\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 6\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.549615,\r\n                                \"lng\": -46.64668\r\n                            },\r\n                            \"html_instructions\": \"Continue onto <b>Via Elevado Pres. João Goulart</b>\",\r\n                            \"polyline\": {\r\n                                \"points\": \"ftvnCnsu{Gc@Fy@RSDQD\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5502834,\r\n                                \"lng\": -46.6464751\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"87 m\",\r\n                                \"value\": 87\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 8\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5488597,\r\n                                \"lng\": -46.6464477\r\n                            },\r\n                            \"html_instructions\": \"Take the exit toward <b>Zona Oeste</b>/<wbr/><b>Lapa</b>/<wbr/><b>Consolação</b>\",\r\n                            \"maneuver\": \"ramp-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"bpvnCvtu{Gc@K_@KC?g@Kg@I\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.549615,\r\n                                \"lng\": -46.64668\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.2 km\",\r\n                                \"value\": 177\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 22\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5473431,\r\n                                \"lng\": -46.6459397\r\n                            },\r\n                            \"html_instructions\": \"Continue onto <b>Praça Franklin Roosevelt</b>\",\r\n                            \"polyline\": {\r\n                                \"points\": \"jkvnChsu{GIAWI]KCAa@K{@UiAYMCOEQEC?C?K?\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5488597,\r\n                                \"lng\": -46.6464477\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"2.2 km\",\r\n                                \"value\": 2158\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"6 mins\",\r\n                                \"value\": 334\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5562263,\r\n                                \"lng\": -46.6639784\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>left</b> onto <b>R. da Consolação</b><div style=\\\"font-size:0.9em\\\">Pass by Sujinho (on the right in 1.6&nbsp;km)</div>\",\r\n                            \"maneuver\": \"turn-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"zavnCbpu{GMHEBEBIL?NAN?P?R@d@?TQITx@FZHb@^dBLh@b@fBJd@Nt@BLJd@Ll@Lj@^zABJBPp@vCH\\\\b@pBLd@DPTt@@BDHVj@b@~@FNj@jAl@nAt@|Ad@~@FNFLjAhCb@dAdAjCP^vAlD\\\\t@j@lAn@pAh@bAZj@JPFPf@x@r@lAJPJNt@hA@@DFr@|@JTh@l@@@pAdBl@x@zBtCJNb@j@JNPVDHFFFLFJFPFLFPFNFR\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5473431,\r\n                                \"lng\": -46.6459397\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.2 km\",\r\n                                \"value\": 212\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 21\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5567688,\r\n                                \"lng\": -46.66596149999999\r\n                            },\r\n                            \"html_instructions\": \"Continue onto <b>Viaduto Okuhara Koei</b>\",\r\n                            \"polyline\": {\r\n                                \"points\": \"lywnCz`y{GFXJf@@NDR@JFz@@PDZFf@H`@J\\\\L\\\\Ph@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5562263,\r\n                                \"lng\": -46.6639784\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"50 m\",\r\n                                \"value\": 50\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 22\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5571254,\r\n                                \"lng\": -46.6660463\r\n                            },\r\n                            \"html_instructions\": \"Slight <b>left</b> toward <b>Av. Rebouças</b>\",\r\n                            \"maneuver\": \"turn-slight-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"x|wnCfmy{G@?B?B@@?@BDHBD@BB@BBB?B@@?@?B?@?BANM\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5567688,\r\n                                \"lng\": -46.66596149999999\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"63 m\",\r\n                                \"value\": 63\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 14\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5568372,\r\n                                \"lng\": -46.665511\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>left</b> onto <b>Av. Rebouças</b>\",\r\n                            \"maneuver\": \"turn-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"`_xnCxmy{GYo@CG[s@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5571254,\r\n                                \"lng\": -46.6660463\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.1 km\",\r\n                                \"value\": 95\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 31\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5574254,\r\n                                \"lng\": -46.6648417\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>right</b> after Lanchonete Bella Jau (on the right)\",\r\n                            \"maneuver\": \"turn-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"f}wnCljy{Gx@aARUf@m@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5568372,\r\n                                \"lng\": -46.665511\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.6 km\",\r\n                                \"value\": 591\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"2 mins\",\r\n                                \"value\": 128\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5612672,\r\n                                \"lng\": -46.6688458\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>right</b> at the 1st cross street onto <b>R. da Consolação</b>\",\r\n                            \"maneuver\": \"turn-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"|`xnCffy{GXZXXHJXXvAzAr@t@b@d@h@j@n@p@ZZTTNPNNXZbBfBr@v@NNHHLNh@h@fAjA\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5574254,\r\n                                \"lng\": -46.6648417\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.1 km\",\r\n                                \"value\": 141\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 39\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.56039,\r\n                                \"lng\": -46.669846\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>right</b> after Shell Conveniência (on the right)\",\r\n                            \"maneuver\": \"turn-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"|xxnCh_z{Gq@v@c@f@yAfB\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5612672,\r\n                                \"lng\": -46.6688458\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.1 km\",\r\n                                \"value\": 106\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 41\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.561085,\r\n                                \"lng\": -46.670554\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>left</b> after Minuto Pão de Açúcar Jardim Paulista (on the left)\",\r\n                            \"maneuver\": \"turn-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"lsxnCpez{GhCjC\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.56039,\r\n                                \"lng\": -46.669846\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"46 m\",\r\n                                \"value\": 46\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 17\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5613894,\r\n                                \"lng\": -46.6702447\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>left</b> onto <b>R. Camiranga</b><div style=\\\"font-size:0.9em\\\">Restricted usage road</div>\",\r\n                            \"maneuver\": \"turn-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"vwxnC|iz{G|@}@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.561085,\r\n                                \"lng\": -46.670554\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"46 m\",\r\n                                \"value\": 46\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 17\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.561085,\r\n                                \"lng\": -46.670554\r\n                            },\r\n                            \"html_instructions\": \"Make a <b>U-turn</b><div style=\\\"font-size:0.9em\\\">Restricted usage road</div>\",\r\n                            \"maneuver\": \"uturn-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"tyxnC~gz{G}@|@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5613894,\r\n                                \"lng\": -46.6702447\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.4 km\",\r\n                                \"value\": 377\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"2 mins\",\r\n                                \"value\": 90\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5635306,\r\n                                \"lng\": -46.6731127\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>left</b> onto <b>R. Dr. Melo Alves</b><div style=\\\"font-size:0.9em\\\">Pass by UV.LINE (on the left)</div>\",\r\n                            \"maneuver\": \"turn-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"vwxnC|iz{G@@~@dAvAzAbAdALNHJfCjC@BhBhB\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.561085,\r\n                                \"lng\": -46.670554\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.2 km\",\r\n                                \"value\": 228\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 65\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.562387,\r\n                                \"lng\": -46.67491529999999\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>right</b> onto <b>R. Estados Unidos</b>\",\r\n                            \"maneuver\": \"turn-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"`gynC|yz{GGNe@dA?@MZEJUl@y@xBqA`A\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5635306,\r\n                                \"lng\": -46.6731127\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"1.5 km\",\r\n                                \"value\": 1527\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"4 mins\",\r\n                                \"value\": 223\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5693094,\r\n                                \"lng\": -46.6876405\r\n                            },\r\n                            \"html_instructions\": \"Turn <b>left</b> onto <b>Av. Rebouças</b><div style=\\\"font-size:0.9em\\\">Parts of this road are closed Mon–Fri 5:00 – 8:00 PM</div><div style=\\\"font-size:0.9em\\\">Pass by Galeria Teo (on the right)</div>\",\r\n                            \"maneuver\": \"turn-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"|_ynCfe{{GYN^h@f@r@DFz@lAlAfBNTFJHLRd@z@nBVn@LT@DHRRb@Rf@Rf@Vh@nBtEvAbDf@hAh@nA@BPb@Zr@z@pBh@lAf@lAjAjCVn@HRl@rAP`@`AzB`@`AfAdCj@tATd@n@zADJFR\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.562387,\r\n                                \"lng\": -46.67491529999999\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.6 km\",\r\n                                \"value\": 622\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 55\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5711998,\r\n                                \"lng\": -46.6932392\r\n                            },\r\n                            \"html_instructions\": \"Slight <b>left</b> onto <b>Túnel Fernando Vieira de Mello</b>\",\r\n                            \"maneuver\": \"turn-slight-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"dkznCvt}{GD@BB@BBBBHTd@?@\\\\x@P\\\\r@fBFJl@xAh@nAd@bADLHRFPN^H`@BX@NBVHv@@L?D@NJfBFlADd@Bn@@V?N?JCP\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5693094,\r\n                                \"lng\": -46.6876405\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.6 km\",\r\n                                \"value\": 605\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 60\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5719024,\r\n                                \"lng\": -46.6991251\r\n                            },\r\n                            \"html_instructions\": \"Slight <b>left</b> onto <b>Av. Eusébio Matoso</b><div style=\\\"font-size:0.9em\\\">Pass by Lava Mania (on the right)</div>\",\r\n                            \"maneuver\": \"turn-slight-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"~vznCvw~{GLxBBf@F~@Bd@?D@NDTD^BP@L@@?HBZB^@\\\\?VBh@Bf@?LJxANbCFdADn@@Z@RBZLpBDt@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5711998,\r\n                                \"lng\": -46.6932392\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.3 km\",\r\n                                \"value\": 267\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 26\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5706685,\r\n                                \"lng\": -46.70101469999999\r\n                            },\r\n                            \"html_instructions\": \"Slight <b>right</b> onto <b>Praça Antônio Sabino</b>\",\r\n                            \"maneuver\": \"turn-slight-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"j{znCp|_|GERCHCHEFEFA?GDMDQHCDCHAFAF?H?H@\\\\?z@@TAHAJAFCDGFEDMHOFSHC@A@C@A@E@[JCB]LGDEBAD\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5719024,\r\n                                \"lng\": -46.6991251\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"2.0 km\",\r\n                                \"value\": 1991\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"2 mins\",\r\n                                \"value\": 135\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5570662,\r\n                                \"lng\": -46.7121284\r\n                            },\r\n                            \"html_instructions\": \"Slight <b>right</b> onto <b>BR-116</b>\",\r\n                            \"maneuver\": \"turn-slight-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"tsznChh`|Gi@RKDs@RIBe@Nm@Nw@RA@g@LSFqBj@ODYHWHWFA?OBi@N[Ho@Ng@L_AV}@V[FmA\\\\sA^}Bl@_Cl@_AVwAb@{@\\\\k@Vy@Z}Ax@a@VUL]Te@\\\\_@Va@\\\\e@`@s@l@YZg@h@QPQTCBq@z@[d@EHU^eAbBi@dAc@~@Uf@_@`Ae@jAMl@KZEJSn@KVKZKTELUj@Qd@Qb@Wl@GRQb@KTi@vA[t@[p@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5706685,\r\n                                \"lng\": -46.70101469999999\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"79 m\",\r\n                                \"value\": 79\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 5\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5568836,\r\n                                \"lng\": -46.7128711\r\n                            },\r\n                            \"html_instructions\": \"Take the ramp on the <b>left</b> to <b>Marg. Tietê</b>\",\r\n                            \"maneuver\": \"ramp-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"t~wnCxmb|GCNENCNGRENCH?DADAFAF?D?DAB@B?D\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5570662,\r\n                                \"lng\": -46.7121284\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"4.5 km\",\r\n                                \"value\": 4492\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"4 mins\",\r\n                                \"value\": 226\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5327612,\r\n                                \"lng\": -46.747605\r\n                            },\r\n                            \"html_instructions\": \"Merge onto <b>BR-116</b>\",\r\n                            \"maneuver\": \"merge\",\r\n                            \"polyline\": {\r\n                                \"points\": \"n}wnClrb|GuAlDqHtR}A|DaBhEKRQd@mC~GQ`@eFrMkAdDs@hBYr@c@fAELa@bAc@dAYt@A@a@bAYl@a@|@KRQ^EHi@bAELm@hAUb@U^QXw@`Bi@lAg@pAWp@Un@k@xAe@lAYn@S`@QXMRS\\\\KNEFIJY^WXIJ_@b@]b@c@f@e@j@A@o@r@ORYZEFQRaBlBUV_@`@CDk@p@o@t@oAxAcAlAy@dA_AdAa@d@o@t@_@b@oB|Bu@|@uH|I{FxGwDlEmAvAeAnAYZEDk@p@{BhCmAxAoAxA_AfAmAvA]\\\\WV{@z@CBo@h@o@`@IFg@Vo@V_@N\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5568836,\r\n                                \"lng\": -46.7128711\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.4 km\",\r\n                                \"value\": 371\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 19\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5294555,\r\n                                \"lng\": -46.7479536\r\n                            },\r\n                            \"html_instructions\": \"Slight <b>right</b> to stay on <b>BR-116</b>\",\r\n                            \"maneuver\": \"turn-slight-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"vfsnCnki|GSDc@JMDk@JE@QD_@Dg@Du@DA?Q@mADm@@kA?iAAC@u@?k@A\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5327612,\r\n                                \"lng\": -46.747605\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"2.6 km\",\r\n                                \"value\": 2578\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"2 mins\",\r\n                                \"value\": 131\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5181767,\r\n                                \"lng\": -46.7322315\r\n                            },\r\n                            \"html_instructions\": \"Keep <b>left</b> to stay on <b>BR-116</b>\",\r\n                            \"maneuver\": \"keep-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"brrnCtmi|GSDK@[?iA?{@?kBAuA?Q@eB?uBAoB?kAAA?KAWAC?YAEAg@C]CYCiAIaC[gBYgB_@SGWGICk@Os@So@UcA]e@Qg@SIGk@YSKMKUMYSAAWQ[UUUWSY[KMKKU[SYQWS]MWKSKSIUIOKWEOKWK_@GQAKAA?A?A?EQu@GYESGc@Gc@Ei@Em@Cc@Aa@A[?U?W@W?[D_EBqABqAHoFD{CBiCDwBFiFDuB@iA?S@oCAa@AMA]Cc@Ce@Go@AUE]\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5294555,\r\n                                \"lng\": -46.7479536\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.3 km\",\r\n                                \"value\": 255\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 15\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5173933,\r\n                                \"lng\": -46.7299274\r\n                            },\r\n                            \"html_instructions\": \"Take the ramp to <b>SP-348</b>/<wbr/><b>Bandeirantes</b>/<wbr/><b>SP-21</b>/<wbr/><b>Rodoanel</b>\",\r\n                            \"maneuver\": \"ramp-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"rkpnClkf|G@YAK?OCUCSCQEWEUCQCMAGEOEOEOGQM[EIACKUKYo@wAAAAM\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5181767,\r\n                                \"lng\": -46.7322315\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.2 km\",\r\n                                \"value\": 180\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 11\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5165233,\r\n                                \"lng\": -46.7284423\r\n                            },\r\n                            \"html_instructions\": \"Merge onto <b>Av. Marginal Tietê Central</b>\",\r\n                            \"maneuver\": \"merge\",\r\n                            \"polyline\": {\r\n                                \"points\": \"tfpnC`}e|GGKKWKSGMo@qAa@{@OWc@}@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5173933,\r\n                                \"lng\": -46.7299274\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"1.6 km\",\r\n                                \"value\": 1577\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 86\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.5066188,\r\n                                \"lng\": -46.7217091\r\n                            },\r\n                            \"html_instructions\": \"Take the <b>SP-348</b> exit toward <b>Bandeirantes</b>/<wbr/><b>SP-21</b>/<wbr/><b>Rodoanel</b>\",\r\n                            \"maneuver\": \"ramp-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"fapnCvse|GAUEMSg@o@aBAEKYGOi@}@e@{@k@cAw@sAWi@AEAAAAQe@K]Mi@GUIYKSEIUg@Q]CICGk@qAWk@aAgBy@sAKMa@e@YYWUECOE{@o@MIOIiAs@w@e@k@]{@i@{@i@_@S]Ui@]q@]WMQG[Kc@Ki@MUCQ?MC]@[BK?i@Hc@L]JQHQJ[To@h@[\\\\s@v@qAzAi@d@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5165233,\r\n                                \"lng\": -46.7284423\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"32.5 km\",\r\n                                \"value\": 32488\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"21 mins\",\r\n                                \"value\": 1251\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -23.2659512,\r\n                                \"lng\": -46.8606912\r\n                            },\r\n                            \"html_instructions\": \"Continue onto <b>Rod. dos Bandeirantes</b>/<wbr/><b>SP-348</b><div style=\\\"font-size:0.9em\\\">Toll road</div>\",\r\n                            \"polyline\": {\r\n                                \"points\": \"jcnnCtid|GyA~AKP_Az@iAdAoAfAqFpE_CrBEDGFIHc@`@iBbBaBzA[ZmAfAA?MLWTWT}@t@{@p@_Ap@mAx@_@VMHeAp@}A`AuAv@y@f@aAf@c@Xc@ZSJg@V_C|AgCrAiEjC_EtCo@b@IFe@^KJQLe@^_BpAq@j@m@f@g@b@e@\\\\}@x@URUTYVaAt@qG~E_@Xq@`@E@GDOHOFMHOHOFk@RQHSHSFC@w@R[H]Fa@HI@q@Ji@FA?YBI@aBLoAHiBJoCPgAHiIf@mBR}@Lu@JaAPsA\\\\{Ad@iAb@o@XmAn@SNa@Xa@XSPSPWRWVQP[ZGFm@f@aApAmArBcAtB{AjEs@~B}@xCWv@?BKVCHM`@IVUh@M\\\\OXOZKVQXQ\\\\w@pAu@~@aBzAgAv@mAt@e@Rm@Vc@P}@XiDhAeBj@}FlBoAb@q@R[J{@XeAZq@To@TiDhA_GpBWHODkFfBu@Ri@HgBV}@Tc@H_ALoANaANu@HiALo@HMBm@FmANgFn@_BRwC^}C^m@H_ALM@aD`@wFt@{AR{Df@a@Ds@JqAPa@DgCZa@FUBsEh@eFn@yEn@}@Ja@FkCZuC^cCXgCZq@J_AJyATwAXeATmCv@uBr@yFxBi@TQF_@NaBp@aE~AA?mBv@iA^aBp@_@NkAd@u@V}@\\\\g@Lk@NSDg@HUDy@Jm@DM@sBFyADqBDK?Q@S@G?G@oDJiGNcDJiABiA@kCHE?]@iEHaFLwADoADgAHs@Hi@FiB`@_@Ji@PYJUJsAn@KFg@Rw@^i@Xc@T}BhA}CzAg@Vi@V}Av@{CxA{BfAg@VyCvA}@b@sAn@q@\\\\_@PUJ]Nc@PCB[L_@NQHeA\\\\sBp@cAXkBf@E@{A\\\\C@g@JSDUBe@JoARoAPK@_AJqBP{BNwBJcBDyC@W?o@?mA@aPHG?}BDaCB_EFQ?kDJQ@{BFcETuDPmAHmCR_DRwCPcDVwCRi@DaCNiDRS@oCN}@DaELo@@cCBsDHy@BmABkEHoFF_DFkBFk@Bu@Fq@H{@L_ARw@PgA\\\\a@NqAf@aAd@a@TaAl@w@h@_@ZUNKJOJSPq@n@m@l@a@h@]d@IJGJEBgAvASTCFgAvAW\\\\oCnDm@v@W\\\\W\\\\g@n@uAfBgB~B{@fA{@dAaAbAq@j@o@f@eAt@i@\\\\iAn@u@b@q@Z}C|Am@Zm@ZC@q@^s@^k@XaAd@gAj@gAj@q@\\\\KD_@RwCxAyC|Ac@R}BlAwCxAsB`AmB|@y@Xy@X_ATuATmC\\\\wEj@sARiB^qA`@c@PaAb@c@R_@REBw@h@[R_@`@e@d@e@j@]^_@d@UXEHU\\\\ILMRSb@Sd@[x@_@dAOj@Qt@Ov@K`AId@{@bGOz@q@nCSh@g@lAuAdCGFu@dAk@p@}@hA]`@y@dAiArAm@x@m@x@c@v@GJ[f@]n@S`@[j@Uh@o@`Ba@lAQn@Ql@Kh@Or@WpBKz@KhAUtCKtAA`@Et@WtFc@dJOfDOlCO~BMbBSbBY`BUhA[lA_@lA]z@c@bAc@|@y@~Am@bAo@~@m@v@k@p@kArA_C~B{@x@y@z@YXYVIHcA`AmArAwAzAuAvAaBdBs@v@YVCDwAtAiBrBUVKL[\\\\[Zi@h@i@h@yCdD}@z@QPQP}@v@c@^k@`@s@h@g@\\\\]TUNGDe@Xm@\\\\u@^k@Zw@^KDcAb@qAd@g@Pg@Nc@Lm@Ps@Ps@Pw@Pu@Lu@Lw@Lw@HQBy@Hw@Hc@D]@C?{@BK@{@@w@@A?{@?iDDoCBc@@I?Y@yHHaGFwABkA@i@Bu@B{CJeDFaC@m@?{@@u@@I?qC@eEBK?C?E?E?I?I?OAiCBm@?sDD}@?Y@Y?oB@o@@_A@{@@s@B_ADYBSBk@F]FYDWDSFQDg@Nq@Tq@XKFu@\\\\i@ZYN_@VYRq@j@_@\\\\k@j@KLa@d@e@p@W\\\\QV]j@MVEJGLCHGJEJCJEJELEJCJEJELCJELCJCJCLMd@Md@q@pCMb@_ClJq@fCw@zCo@pBe@lAk@hA_A~AA@UZW\\\\SXABg@p@_@^[\\\\_@^WX[X]\\\\YV]\\\\[XUTiAfAoAnAYX}AxAmCnCsArAkCdC}AtAcBhAc@Ty@^y@Xi@N}@T}@LA@g@Fm@Hi@Dk@D}@FW@U@UBW@S@q@BQ@O@qBLwAHiADaADy@FeBJuALSBo@J[DSDUFg@LSDSFUHa@PWLUJUJQJSJc@VQLUN]VQPq@j@o@l@_@b@m@r@QRGFA@UZu@z@KNW\\\\o@v@_@d@i@n@QRaAnAg@j@YXa@d@QNKJk@d@YRk@`@e@Vg@VC@c@T_AXy@V]FKBi@J{@Je@FaBLcEVqI`@gJd@iBLmG^wCPcCLyALw@H[Fs@LmAZw@ViAf@gAn@}AdAIH[X]XIHMLwA`ByApBeB|BiB~BcB~BsAbBc@j@W\\\\CB[d@EBCFEDC@KJm@n@i@j@ONgAfAMJg@\\\\kA|@e@Za@Vk@`@MH]TKDw@f@oC~Ae@Zo@`@_@VYRQNOLIH[V?@m@f@q@l@WXQTYXSXY\\\\m@t@w@jA_@n@{@tAABs@`B\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.5066188,\r\n                                \"lng\": -46.7217091\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"48.6 km\",\r\n                                \"value\": 48554\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"30 mins\",\r\n                                \"value\": 1793\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -22.9249616,\r\n                                \"lng\": -47.1300236\r\n                            },\r\n                            \"html_instructions\": \"Keep <b>left</b> to continue on <b>Rod. dos Bandeirantes</b><div style=\\\"font-size:0.9em\\\">Toll road</div>\",\r\n                            \"maneuver\": \"keep-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"dc_mChn_}G}B~Dm@bAoAzBCBaA`BWf@S^eAfBILaA|AU\\\\iCdEILORq@z@MLSRa@`@UTc@`@iAx@c@Xw@b@c@TWLo@TWJk@TWJyAf@iI|Bm@PwCx@uA`@a@N_A`@]NUJSJA@]R]RiAr@e@Zg@\\\\o@h@y@t@GDo@r@qDtEuEfGkI|Ku@dAuBvCc@l@k@v@_@^ILIJKNIJA@]`@s@r@_AdAmBjBaAz@EDUPs@l@uCxB_EvCgBnAUPOJMJe@^qA`AUT[VQPGFe@b@o@l@i@d@{@|@KLMLwAbBy@bAk@n@UZY^KPaBjBg@n@KLWZ_AhAgBrB{@dAc@d@a@d@_@f@a@d@WZuEzFyCtDiDdEW\\\\A@m@v@W\\\\yAnB}AtBILILKNMNORcDzEcFpHgCtDcAvAcBfCKLILIJIJeHjKU^gCtDU\\\\uDtFcAxAm@z@W\\\\uBzCc@p@sCdEwH|Kg@p@o@|@oAhBcEdG{BhDSXCBGJQVSXmC~DmCzDkElGkEnGk@z@oErGSZ_B~Bg@v@o@x@gDhEIJEDCBEFED}@bASTSRSTSRSRUTWTWVWTWTCBYVGDWVWTYTWTe@^e@^gBrAg@\\\\kAx@YPCBSLYPYPYPYPYP[NKFWNWNWLMHKDSJC@WNYLWLYLULA?YLWLMF_A^MF_A\\\\u@ZKD_@LYJYHe@Pe@NYHA?WJg@LYHYHYHoBh@cIlBqBd@YFa@JA?yD~@QD{D~@uA\\\\c@JsAZ}D~@a@JoBd@eE`AcCl@mCn@sBd@{@T}A`@gGvAeJvBgEbAsAXoGzAC@c@Jo@Pq@PWHG@SDQFOBODIBA?I@ODA@KBMBMBcGvAsKhC}A^qAZwA\\\\wA\\\\WDcBd@wHjBkBb@gAXcAX}Ad@aAZ_Bl@c@Pa@NoCfAw@ZqCvAaBt@}@f@s@\\\\m@^m@\\\\mBnA{@h@a@TsA`Ao@b@uAbA]Vm@d@gAz@e@`@a@^yEjEiAhAmCzCWXk@p@e@ZC@g@l@YZ}BjCeAlAw@~@k@l@y@bAIHcAlAaDnDWZ}EnFkBxBWZYZ{ClDCDyAdBmDbEaF|FKLML{A~Am@n@w@t@QPQRoAnAEBYX[XKJyArAsAjAYVyAlAoAdAsBfBiA`A_@\\\\m@h@{CdCmBbBA@YT_@Zs@l@y@t@kAjA[XYX]\\\\]^m@n@]`@[^m@r@i@r@CBSVk@t@CDU\\\\KN_ArA[d@a@p@s@lA{@vAWd@]l@Wd@g@`A_ArBGLYl@EHw@fBkAfCcAzB_AnBe@bA_@z@eAzBmAhCk@jA_@n@EJQ^S`@Q^y@bBe@`A}AdDyAbDq@nAw@pAeAzAi@n@[\\\\a@d@a@\\\\q@l@gA~@o@b@gAt@i@Xg@Xc@ToAj@mAd@WFEBIBi@LC@SFs@NyBf@y@PWFIBoAZa@JIBqAXcATeDv@iB\\\\q@RgBb@[JE@uA`@g@Rq@X[LGBSHk@ZcAl@i@Zc@Z{@l@OLYV]Xg@d@[Ze@d@aAdAqAzACB_DxDWZ[^eCvC{@dAcG~Gu@|@w@z@m@r@QTOPMP?@MLKLm@r@cAjAqA|AuBbCkC|CqB~Bk@n@aCpCeBrBWZ_@b@yClDSV]`@GFkCjDeCrDcAxAs@nA}@|AmAzBuAxC_BvDCDc@bAk@nA_CnF_@r@Q\\\\S\\\\S\\\\SZU\\\\EFMRUZUXWZUXWXWXWVYVWVOJoLlJe@^gIpGwDrCUP[V}BdBsAdA_Ap@EBwJ|Hm@d@[TaBpAuAdAmA`AMHMJIDQNSNMJcHpFuB|AKJyAfA[TKDMF]V[P_@TWNID[N_@P]P_@N_@N]Na@N_@L_@L_@JWHIBWFGBYFGBa@H{@PgBZsE|@sFfAk@Ja@HI@g@Le@Ne@Le@Ne@Na@NA?_@NA@g@RULMFc@Rc@Ta@Vi@^UNm@f@m@d@_D~BaD`CmHfF{BbBw@h@cBlAcAp@_C~AiJfFk@X}CzAgLlFULID_@NsFhCiBz@WLgAh@iCjAmHbDoCrAMHSJa@Ta@V_@Va@V_@Va@X_@X]ZA?[XA?]Z_@Z[\\\\SRIH]\\\\[\\\\kBtB[\\\\CB_@`@sCzCyDdESREFeFtFSTEDSRsFbGuSfU}@bAQTSTQTcAhAONq@r@]^g@l@a@h@Y^o@t@A@YZuBfCOPMNYXGFUVe@d@eCrBi@n@g@n@i@j@GFkAlACDsArAi@j@QPGHiCnCMN]^MNOPg@f@q@v@GFIHOPQNeAhAeAfA_CpCiDdEkC`DoBhCuE`G{GvIyEnG?@WZ}@lA}ArB{CpDo@|@o@|@ORqCnEaAlBS^w@|AeBvDk@zAKVKVKVMV_@|@qDnIkBdDi@t@kCzCMHYXKJw@l@}AhAKD}FrC[LC?WJ}DzAmM~E{U`JqCdACBa@L_@NiI|C_@No@Tk@Tk@Tm@Tk@Vk@TUJk@Vk@VKDMFGB[P_Bv@WNiAn@mAx@uAdAeK|Iq@j@i@d@WR?@WT_BvAw@r@[V[Xu@p@w@p@qH|G}A|AwC~C}@hAg@p@aB|BQVgAbByDfG_IdMcF`Io@fAoAhBSZEHu@lA}@xA}A`CeClDi@p@uCbD_B|AYXUTkB|AkA~@gBtAiEdDqB~AKHCBWRSPeBrAe@^m@d@sAbAaD`CuEzD_CjBML[XyBvBQPkBpBiAvAGFOPMRMPOPMREH}BpD_IfMuBhDKPMRCFKNINKNINEFEDKNKLKLGFKLEDMLKLi@d@URWPs@f@m@\\\\UJUL[Ny@\\\\o@Py@ReARw@JcAHw@BQ@_GJ}CJeCBwEFu\\\\h@K?[@M@]@U@A?_@@g@Be@D_@D_@D_@Dy@LYFWFWFYF_@Ja@J_@L_@Lm@TSHUHSJuAn@qG~Ca@PiL|FiB~@gB|@GBWL{@d@kB~@mAl@EBE@SJEBc@Tk@XA@eB|@i@\\\\s@`@u@d@s@b@g@\\\\g@^g@\\\\g@^sH|Fe@^[Vm@b@[V[Vq@f@eCnB[V]TOLQNKF[ViEfD{BdBOL]VIH}AlAa@X_@Va@Vc@V}@f@ULWLWJaBp@YJKDA@]HKDc@JODODC?a@JeB^a@HSB{@Jk@FQBg@Bw@BaADcABm@@M@qC@_D@aD@mIDmC@eBBaB?uD@oA@gA?_@@iA?c@@c@?c@?C?gB@c@@w@?sD@wC@oC@uA@eA@gABeABgABw@BM@gADeBJcAFcAHcAHcAJeAJm@Fm@Ho@Hm@JeANeAPeAReAR_C`@i@Ja@FwAVqDp@uB^}Bb@}Dr@iCb@a@HOBoF`AkEr@kARmDl@mARw@LiBZmAPeB^UDSFKBSFSFKBSFSFC@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -23.2659512,\r\n                                \"lng\": -46.8606912\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"7.3 km\",\r\n                                \"value\": 7281\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"5 mins\",\r\n                                \"value\": 271\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -22.8637616,\r\n                                \"lng\": -47.1365946\r\n                            },\r\n                            \"html_instructions\": \"Keep <b>right</b> at the fork to continue on <b>Rod. Adalberto Panzan</b>\",\r\n                            \"maneuver\": \"fork-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"~o|jCrat~GM@G@YHcBn@m@Xq@Z[Ne@Z}@l@_Ar@wAhAWT[Xs@n@]Z[VcAz@iAt@]Ts@b@w@`@q@Z_@PKFYHc@NmEjA{FxAKBoCl@{AXa@HQDMBaB\\\\oFfAeDr@aAR]HiBZa@HUFK@cBXK@UDeANuBN}@D_ADo@@_B@uA@iEAY?WA_DBcD?oB@oDCiA?uEAyF?iBCyDKgBOo@GoBUcAOSEa@I[G_AQkAW{Ae@iA[gA]eA_@sKsDg@SGCSG_@OuIwCSIsBy@s@WiA_@aA[OGa@MMEaA]_A[qAa@ECC?]MCAo@Sk@Si@UeA[gAYyA_@m@Ms@Om@Mk@M_AM[Ga@EEA]Ec@G_@EgAMeCQa@Ca@Cc@CYAq@Cg@AcBA_@?]?C?i@@_@?]?M?O?y@BC?_AB[@g@BiAFiAF_AF}@DcAFi@B[BaAF_AF}@D_ADeAHE?a@BkBJq@Dc@Bc@BsG\\\\uCPE?wDR{DTw@Fa@DW@C@WB[De@He@HeATQFy@TQDg@NwBv@s@\\\\a@Ta@VgAp@oA|@w@n@{@z@s@v@[`@IJk@t@a@l@OVOVMTMXCFaBbDg@~@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -22.9249616,\r\n                                \"lng\": -47.1300236\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"21.5 km\",\r\n                                \"value\": 21527\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"15 mins\",\r\n                                \"value\": 929\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -22.7338029,\r\n                                \"lng\": -47.2862328\r\n                            },\r\n                            \"html_instructions\": \"Continue onto <b>Via Anhanguera</b>/<wbr/><b>BR-050</b>/<wbr/><b>SP-330</b> (signs for <b>Americana</b>/<wbr/><b>Limeira</b>/<wbr/><b>Rib. Preto</b>)<div style=\\\"font-size:0.9em\\\">Toll road</div>\",\r\n                            \"polyline\": {\r\n                                \"points\": \"nqpjCtju~Gk@lAwEzJe@z@gC~EkCrF[r@]p@uAxCITgD`H_@x@KTSb@KTq@pAWl@MRg@`AaApBOTMV?@OVg@dAoGzMeBhDEFi@dAKTMTeAjBOXKPIN[h@MRKRqA`CS`@s@pAg@|@KRaBrCo@hAg@~@_BpCGJ?@}ArCkAvBUb@GHuB`Ew@xAaAdBg@|@s@nAw@nAi@v@gA`Bi@x@eAvAUXs@|@qA`BwA`Bu@x@c@d@]Zk@j@o@h@]Zg@d@[ZIH_BzAqEdEED{GlGOLCDEBMLcC|BaLlKq@l@YX}AtAUTMJsBlBcCxBg@f@m@h@kAhAkAfAeA`AgA`Au@r@w@r@yEnEu@r@qAjAc@`@[X]\\\\i@f@[TuBxBeBhBq@x@c@d@g@p@a@f@SVi@v@c@n@iC|D}AnC}@zAm@nAEH{BtEOb@g@hAi@lAuBxEKVGNSd@KTeAdCUd@Sf@Sd@KTQ`@kApCyB`FUh@Uh@oChG{@jBm@rAgC|FqBtEkBjEGJADu@~Aw@lB]x@Q`@oBnEa@|@Q`@Wj@q@xAQ`@e@bAu@~AmClGKREL}BjFADyAlDwB`F{BvEoCdF}DnGeBjCiAlBeDjECB}BrCkBxB]\\\\cHzG_@\\\\A@EDIHeJvIIF_CxBaCxBYX]`@uBfB{@x@eDfDc@^IFIFGD}C|Bg@\\\\u@d@[REDg@Xo@^o@^gAl@mAj@gBv@mGdCsBv@gBv@g@RuAj@aC`Ae@R_@NaBr@wChAsFxBeAb@[N[L_@NMDQFYLYLwDzA_JpDuAh@eAb@yGlCaCbA_HpCgCbAsFtBkFzBsAf@eE`BWJaHvCgFtBMFUJq@VoDvAkBt@{GlC_@R[LUJ[Pu@h@QJk@\\\\WRi@^m@d@c@b@IHONMLa@^EDGHoArAGFEFc@h@i@l@a@f@g@l@eAnAOTcB`C_@h@q@fAA?i@v@[b@SZIJqAnBKNOTW\\\\MPU^OVABOTCDu@~@e@r@i@p@qAbBKNGHEFGFsFhHY\\\\e@n@{@dA_EzEWZ}ClDkCrCg@h@kCpC_DbDEDGFKJIHSRoBxBcAfAyA~Ao@r@uGbHeClCsFtF_GbGEDIFCDCBmG|GwA|AoEvEEBST}A`B_EdEST}DfE_CbCeBhB{EdFaEjEi@j@iEpE}FjGc@d@mCdDKLW\\\\KLW\\\\QTCFKNU\\\\W^INU^U^INU^u@rAINMVQ\\\\KRKPOZg@jAiAxCMZEJq@fBsCvH{BhGa@dAw@zB}A|Ds@vBs@hBaAjCwAvDaBfEsArD[x@Yt@cDlI\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -22.8637616,\r\n                                \"lng\": -47.1365946\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"1.9 km\",\r\n                                \"value\": 1852\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 77\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -22.7198179,\r\n                                \"lng\": -47.2945397\r\n                            },\r\n                            \"html_instructions\": \"Keep <b>left</b> to continue on <b>BR-050</b>\",\r\n                            \"maneuver\": \"keep-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"fewiC|qr_Hu@zBa@hAmAnCEH_AbByAzBc@h@i@l@kAlA{@v@]XoA~@c@Xo@d@qAp@eAb@IDSJKDSHSHIDIBIDIBUFSHUFIBUFIBUFWF]FA@E@[Fe@LgCp@oCh@_APiEz@ODOByJlBeARwBf@wBd@cARYDkDt@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -22.7338029,\r\n                                \"lng\": -47.2862328\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"16.3 km\",\r\n                                \"value\": 16293\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"11 mins\",\r\n                                \"value\": 666\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -22.5943358,\r\n                                \"lng\": -47.3661959\r\n                            },\r\n                            \"html_instructions\": \"Keep <b>left</b> to stay on <b>BR-050</b>\",\r\n                            \"maneuver\": \"keep-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"zmtiCzet_HoDv@C@gDt@{A^gHrAkKrBC@kBd@aAXy@VwAd@g@Ru@Xu@Zm@Xe@Ru@`@a@RSJGD}@f@{@f@aAn@q@f@aAr@A@YRi@b@oAdA}@r@mA`AcEhDaBpAqAbA{BbBqBzA_BrAoAdAy@n@}EtDu@l@kElDGFWP_K~HaExC}ExD_Ap@E@YP{@h@{Ap@mAf@q@Ta@L_@Ja@LoAXaAPy@JsARwAFgCFmBBuBEeCGaACIAmEQ_GQiAEaAC_AC_CEsDIiAAuA?aA@{A@{SZmFLm@@}DD}C@uABk@Bc@B{AJkANs@JsATqAZu@Ro@Ra@Lw@Z{@^g@Rs@b@u@`@wAz@uAz@gAn@q@`@IF}@h@_An@k@\\\\a@VuAx@eAp@gBdAgAr@_Aj@gAp@gDnBwI~EqCfB]TsBpA}BtAeEzBSJwCpAaE~A}@`@cBt@_@NsB~@KDaBp@aA`@gBr@eBt@cC~@_@P}B`AcA`@aA\\\\mBt@gBp@y@Ty@RIBmDjAKBo@Pc@L_A\\\\iA\\\\[HA?iBj@m@T{@V}@Re@Lo@Nc@HYHi@Lu@Ra@Lq@Rm@Ni@Js@N_@HGBa@HKB{@Pk@Li@Ji@Li@LoAZaAP}Bd@kB`@k@NiATcAPm@LKBaARi@LSFUHa@Lo@Vi@Po@Xq@Xg@Xa@VKDUNYPIFYPYPYRk@^_@Zu@l@sB~AyD`DaAt@WTiDpCgDnC[V[V_At@{DdDsD|CUTy@t@kHvGaDvC{CpC{BrBe@b@[XaDxCYXiCbCkOhNkBdBoAjAq@n@gAbAw@t@aFvEcDvC[XgC|BYXsAlAs@p@[X_Az@}AtAaBvAkBdBA?kBdBu@r@s@p@e@b@WVMH?@OLm@h@ONKH]X{ArAo@j@WVWVo@l@o@t@k@v@EFcAxAeA|AEF}BpEa@~@iAlCc@jAcC`GUj@e@bAaA~Ac@l@Y\\\\EDSTMLc@`@i@d@m@b@}@h@o@ZeA`@s@TuA`@}@XeD`AG@a@Ji@NwBn@gAZWHWJiD|@kBh@[Ha@J{Bn@mEnAoCr@gBf@a@JsA`@gAZSDGBqF~AcDx@kAZeEhAe@P\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -22.7198179,\r\n                                \"lng\": -47.2945397\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.1 km\",\r\n                                \"value\": 146\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 6\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -22.593084,\r\n                                \"lng\": -47.3666358\r\n                            },\r\n                            \"html_instructions\": \"Continue straight to stay on <b>BR-050</b>\",\r\n                            \"maneuver\": \"straight\",\r\n                            \"polyline\": {\r\n                                \"points\": \"r}{hCveb`Hq@PWFaB^oA\\\\\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -22.5943358,\r\n                                \"lng\": -47.3661959\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"11.2 km\",\r\n                                \"value\": 11161\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"9 mins\",\r\n                                \"value\": 524\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -22.5009587,\r\n                                \"lng\": -47.399377\r\n                            },\r\n                            \"html_instructions\": \"Keep <b>left</b> to stay on <b>BR-050</b><div style=\\\"font-size:0.9em\\\">Toll road</div>\",\r\n                            \"maneuver\": \"keep-left\",\r\n                            \"polyline\": {\r\n                                \"points\": \"vu{hCnhb`HsCv@eB^o@NcANi@Hi@Fo@FUBI@S@S@{BNQ?gA@c@@e@@MAaAAeBGsDOq@C_CIcEOuEOc@AaCI_AC{BKeAEi@C_GS]AWAaFQi@CeCIOAyCKaBIc@AE?kDMaBGm@Cc@Ae@CyFOc@AQAeBEeDO{FUuDMiDMI?yJ]gACkBKK?yAEwB@aA?qBB_ADcAFWByAL{AN}@Ji@FcBXOBmARK@{@RqAVmA\\\\}Ad@gC|@u@Zi@Tc@PIDKDOHEBUJm@Zm@Z_Ah@ULGDyA~@]R{@j@_@TgAr@aB`AqEnCmAx@eCxAOHOH}DbCs@d@e@VA@]RoElCoBjAIFgC~AeBfAYNuBnAsBjAmAt@w@b@IDc@XULc@Xy@f@o@^g@ZcC~AaC|Aa@VkC`BqBnAg@\\\\iAp@gDrBcCxAKFoC~AULuBpAe@XiC|AgAn@}BrAeEdC}CjBeAn@s@b@sBrAm@^CBIFo@^MFEBULkDtBk@Z_B~@yBtA{ChBkC|A_EfCyEtCWPiBfAq@d@k@Zi@XUL[Ra@TkCbB}@h@{@f@u@d@OHgAn@uAx@sAx@QHg@Xw@b@[L[Nu@\\\\u@\\\\u@Xw@\\\\w@Xw@Vo@To@Rq@RsA\\\\kAXGBYF}@ReDt@cATmAXmA\\\\y@TeCv@SFE@GBSFyAd@sC~@qC|@{Ad@a@LSHk@R[JQFg@Pc@NOF]LODiA^iA\\\\_@LiA`@g@PoA^E@s@TUHSFWHiA\\\\WHe@Py@Vm@PID}GvBw@VOFYFk@Ni@Jq@Ls@Jq@Ja@Ba@Ba@BcADcA?u@CM?c@?c@AaB@mBA[?[@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -22.593084,\r\n                                \"lng\": -47.3666358\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"1.1 km\",\r\n                                \"value\": 1057\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 69\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -22.5012347,\r\n                                \"lng\": -47.4031847\r\n                            },\r\n                            \"html_instructions\": \"Take the ramp to <b>Araraquara</b>/<wbr/><b>Rio Claro</b>/<wbr/><b>São Carlos</b>\",\r\n                            \"maneuver\": \"ramp-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"~uihCbuh`HOEOCOGOEOIMKIGIKGIGKGMEMCMCMAMAY@A?UBWDYFUHWJQLQLQ@AJKPOPKPKRGTERCTCT?R@T@TDRDPHPHPJNLLNLNJPHPHT@DDPDV@V@X?VAVEV_@zA[bBo@jDgAnF?BI`@q@lDQv@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -22.5009587,\r\n                                \"lng\": -47.399377\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"117 km\",\r\n                                \"value\": 117486\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 hour 21 mins\",\r\n                                \"value\": 4867\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -21.8222333,\r\n                                \"lng\": -48.173012\r\n                            },\r\n                            \"html_instructions\": \"Continue onto <b>BR-364</b><div style=\\\"font-size:0.9em\\\">Toll road</div>\",\r\n                            \"polyline\": {\r\n                                \"points\": \"twihCzli`H{@dEI`@I`@eAjFYtAUdAAHq@hDUlAe@vBa@xBKd@AFCHCLIb@Kd@q@hDqCjNwAdH]fBWpAyChOwChOKd@Ib@k@tCId@g@`CCPgBlIsAlGi@rCe@xBMp@GVETg@jCm@|CuA|G[zAOv@Ib@a@nB_@jBa@vByAdHERETk@rCwAfHKd@sA|GCHIb@mAbGId@_@jBw@zDUhAe@`CUdA?BGVI^k@rCId@i@lCADIb@{ApHaCfMkB|Ig@bC{ArHI^G\\\\yAnHCJ[dBgAjFeAfFs@vDS~@CLWnAAF_@fBSbAYxAYzAa@nBwBvKyCbOk@nCMp@q@fD}@pEKh@YtA{B`LGXmAfGI^Qx@Ml@a@lBaA~EIb@Kd@Ox@eAlFKd@Mr@Qx@Id@k@rCKd@YxA[vAoBlKKZQt@q@bDYpAKn@}@fEY|Am@xCI`@m@tCIb@aA|EEPEZ[zAgAxFs@pDgClMG\\\\ADeBbJe@bCs@jDm@vCk@xCg@bCQr@c@fBMb@a@vAWt@ENa@jA}AnFyAnEABw@bCa@jAGPGPeAfD]bAo@pB]bA_BdF{@rCa@jAGPGP[~@yCnJWt@s@zB_AtCu@zBkGpRgAfD[bAM`@kE`NcBnFu@hC_@vAGVCJ[zAYvA]pBU~A[fCKbAEr@M~AGfAEx@EfBAp@An@A`A?dA@~@@vA?`@?jF@n@?l@@vC?P@pA?H?d@AlACx@Ev@?BEx@G|@I|@I|@K|@e@fCYvA?@Q~@AHi@jCy@~DYnAOt@{@pDaArDK^i@jBc@zA_@jAQf@i@dBgAfDEL]bAc@nAg@nAe@nAGLO^MZQ`@MZCFWr@[z@Q`@KVEHYn@EJCF_ArBSb@{A|CwArCOZaAfBaAfBcAdBYf@IN_@n@i@~@k@z@QZ_AzA{@fAmB|Cm@z@yCbE?@}DzE}AfB}AhBiBpB{@~@aBfBwBvBmDhD_CtBgB|A}@r@i@b@YVeDjCoBxAg@^[VmA~@yBzAwCnB[R}AbAg@Xg@ZsAv@u@d@wBjA_B|@oAn@s@\\\\QHgB~@sErB}BdAiFjB}DhBmEfBMFq@XcDnAsAj@GB}EtBmGbCaBr@[L}@\\\\w@Zm@VsDzAeFtBgAb@[L[LoBv@qBz@o@X{@Z_@Ni@PgIdDqBx@[NE@IBYLmAf@oAh@iAd@cAf@gClAkFrCSJyClB}BxAKFGDCB{B`Bo@f@IFMJ]XQNuBfBWRWTKHGDqFpEWRa@\\\\w@p@{@p@o@j@WTC@mB|AiH`GmA~@o@f@_@ZWREB_@Z_@ZSNc@^k@d@e@^e@^i@d@]VkBbBcAz@gA|@UPw@p@cAx@oAhAuAjAqBvAkA`AGD}BlBkLhJi@d@_Av@GDGFe@\\\\kAbA}ChCUP?@QNa@ZwGrFKHONgC|B[Xu@r@A?qCpCaAdAGFgDtDaChCuA~Aq@t@q@t@iAnAuAzAmCxCmCxCWVYZoB|BUVONaBlBy@~@UVoBzBEFCBABC@CBCDu@z@kArAaBfB{@~@OPeErEKJiApAiApAUXA?UVsA|As@r@}AbBsAxAeCpCk@p@C@CDkAtAUV_A`AaAhAuCdDc@d@}A`BYZgAhAIJkBzBeAdACB{B|BA@}ChC[\\\\IHONKJcAdAy@z@UXINMPOTi@r@mBvBeAnASRUZIJMLs@v@WZc@b@cAjAmBvBo@t@eBpBgP~QA@wCfDgAjAY^w@bAUX{CnDoE`F_@`@m@j@eAnAaBvB?@gAfBmAtBSb@S`@iAbCS^w@`BS`@iDhHGNoArC{@hB]p@y@bBcAtBe@`AS`@sAnCa@z@cA~BKT_AnBIPWd@OZi@z@CDi@t@[b@aAlA_BjB{@t@i@f@w@j@eBnAWPe@ZgBnAYRcBlAsA~@iBjAuBxAkBnA}AdAaBjA}@j@e@V]R_A`@qAf@sA`@iB\\\\_BTe@Do@Fk@Du@@}@?iAEs@AcAGMAeF_@E?_EUaCM{@EmCOo@CaAC[CwA?S@e@DeADIB[Fa@Da@Fa@F_@Fa@H_@Ha@HWHw@Pe@PSFUFqAd@k@Vi@Va@Nu@XoCxAgFbC{At@{GtC}DhB_CfAEByAp@_@P}@b@_@PwAp@_Bn@kBZwBJuACiBQmB[{BWsA?iA?yALE@q@Hk@Ni@R{@^A@[PqQ`LmAr@{A~@yA~@aF~CsHxEGD]T_@X[Xi@j@CDILKTKTKVGRITWhASdAMl@E`@Kl@K\\\\IZADEVSn@Wp@k@fAS^_@l@c@l@OPQPYVa@^g@Z_@Vq@\\\\a@R{Aj@sBd@}@RgARcARSD_@HODeARI@YFcARA?_@HqDr@G@kFdAcF`Ag@Ji@Lk@Li@NyAf@a@Pk@To@ZiAn@{@f@}@h@}@f@IFSJ{@h@_DjBu@b@_@RiCzAgJpFyBpAIFcCvA{Ax@k@\\\\iAn@q@^c@Pg@Pw@Rm@HYDmAJa@DUBK@eAHa@Bc@DgDXyALc@DOB_@DC?[BE@YDG@SLg@L[J]J_@Ng@Vi@Xc@XyChBeCdBsAx@aBfASJEBYPyEzCoG~Dw@f@oErC{CrBaAp@k@^{DpCs@p@c@h@_@h@e@`AWr@ABQd@Qr@MtA_@nCSdB[|BALMxACh@A\\\\?r@?BD`@H|@f@dB@Bj@lB`@`BDZFf@DlAAlAI`@CNER?@APMz@On@Qj@e@`AcAnBWj@O`@Kh@Mj@IjAG`@Id@K`@Qd@S`@WZSTi@b@e@Vk@Vg@P[L_A^i@\\\\g@^w@z@CD[d@c@x@K\\\\Sr@WrAUrAADOp@ENGPINIPe@r@y@v@s@p@sAfA{DdDcBxAaD`DUP]VYRg@TkA`@QDc@H[Fw@JU@Y@k@Ac@AE?gBGiBIiFUi@CyEMYA{FSc@AkBGc@Ca@Ac@Ac@Cc@Ac@Cc@AgAEc@AkBGc@CmCKc@Ac@AgAEc@CkDK_FS}BK}DKsBA_A?yABaAHK@QBaCV}Bb@i@H{A^{Bt@eA^iA`@eAf@kAh@QHMHC@QJMHgAv@cAt@yAlAo@l@i@j@e@j@YXc@f@WXk@t@GJMNw@hAy@pAiAzBu@bBk@xAmBlFM`@{AdEkBjFw@zB}BtGiJdXiCtHQb@{CzIM`@oAnDmAlDENIRcDjJuA`Eg@xAO`@}BvGo@fB]dAo@hBABkCtHOb@ENGPYx@Un@O`@O`@}@jCOb@O`@sAxDYx@eB`FKXy@~BWt@KXcC`HiBlFoApDMZADOb@M`@iHtSO`@GRGNO`@M^?@oC|HM\\\\O`@?@}@hCcAzCSj@KX]dA_BrE]dAs@nBOb@i@`BoAnDcAxCgK~YmCxH[jAg@~AMZ_@`AQ^Yn@i@bA]j@]d@_@h@g@p@QVGJA@IJA@]b@WVYTCDYXqA~@o@h@eAp@q@`@e@VyAr@_A`@iA`@{Bt@gAb@[JOFsAf@m@TgA^qAd@aBl@eGtBo@RWJc@PkHbCqAb@?@mA`@UHaAZsBn@wA^a@Jy@TeBd@mBh@A?YHGBgAZyAb@cA^iA^kA`@eBl@_InCs@TKD_@LSFyHjCQHqIzCsIzCOD}Bz@sKvDa@Lk@Rs@Vs@T_Bh@yE`B_@LeCz@cBl@gExAw@XyFnBkA`@wE~AgEvA_@Na@LuAd@_NrEcCx@aA\\\\gEvA{E`BiDlAMDOF}Bv@WJGBuLfE_@L_@LaEvAWJYJw@X{Bt@yFnBsAd@c@Ne@PgGvBiFfBoAf@kGtBiKpDgJ|CgA\\\\a@NkH~BgHdCyShH_@La@LcCz@]JuMtE}HlCwAf@kEzA}E`BeExAmMnEkA`@y@\\\\yAn@sCvAWLGB}@f@{BnA]PuHdEk[bQwCbBC@C@cB~@cBz@KFOFo@\\\\}CfBE@c@V{BlAg@VOH}@h@g@Vo@Z_Ah@_@RsAt@c@TwFxCu@`@a@Ra@Ty@d@a@Vq@b@{@f@_@RqDpB_EzBm@ZoGpDULk@\\\\]R]RgBdAk@Zq@`@cFnCeAj@{@d@w@b@]R_Af@k@XEBe@TkEbC}DxBgDjBgAj@]PqGlDsH|DgInEgCtAyBlAmBdAwBlAwMnH{HlEiEbC}@d@}EdCeCzAmDlBsGdDgAl@yN`IwC`Bm@ZaKvFYNcOfImDnBoGjD{BnAe@VeCtASJ{C`BKDoAt@]RgB`AcAl@y@d@{A|@YPCByA|@{A~@aAn@cDrBaB`AqAt@sIzEiP`JcH|DcB~@iFtC_@TYPA@EBA?EBIF_Bl@qDrByC~AKFcE|By@j@mCxAs@`@g@XaDfByF`D{CbB]PMHo@\\\\_@RgBbA_B|@kFpCsBfAiCxAoCzAkDlB{C~A_OdIkE`CiBbA_ClAIDiB~@C@i@ZiBbAm@^aB~@o@^kCzAkDnBoEbC]PULwEjCi@XA@s@`@gB`A[PA??@_@Pw@`@m@VuAf@e@Pe@No@N[F]FKBWBaCVwAHE?e@@q@?c@C_@Ae@C_@ESCo@GmD[i@EaBOKAe@EEAOAoFk@MAcBWqEg@s@IMCKAqAMsAMmBSmBQaBSeAMaC[YCWEIAoDi@qAOcCa@{Ca@yDa@aBQQAOCUCcFc@eI}@uC[}Da@aBOkEc@c@EeGk@sCYqBS[CmCYe@Ea@Ee@Eo@I_@G]E_@Eu@G]Ee@CoAIm@CcACgAAI?I@wADq@DsAJUBqAPeBZiAVw@Te@LWJ_C|@UJ]R{@`@qAr@q@b@s@h@w@n@UTURaA~@eBxB_AlAuAjB_AnAkBhCsAjBk@t@]d@aAlAy@jAi@r@_FvGGHsAfB_AnAs@~@GHGHQVcDlEyDhFc@l@_FpGMPi@p@CBEFMPGFW`@_B|BOVeErFW^o@x@w@fAuAfBORA?OTwC|D{CfEEDm@|@{@bAoA~Aa@j@GL_@h@SXa@j@e@p@_@l@[h@Ub@_@p@c@z@iAtCGNIV_AtC_@fAOn@On@Q~@y@jEsAfH_AbEo@~C}@rDShA]zAi@hCU|@mAfFm@fDWx@ObAI^c@jBc@pBS`AqAbGg@~BGVi@~BWv@[rAIZI\\\\Qv@UjAeArESv@g@|BSv@Kd@Kb@CNqClMCNGRa@lBCPGRa@lBENERId@o@rCk@pCKb@Kb@CPGRCNERKd@]`BkBtIGVCJ[xAETc@lB_BtHERKb@wDjQEPuCzM{C|NETqElS}AfHy@zE[xAc@rBmB|IcApEq@lCEZGTAJGVCFa@rBi@lCO~@g@zBCLs@dDYrA[nA_@hBETo@nBS`ACJS|@yBlKyDpQKd@a@lBCJGVm@rCIb@cA|Ew@jD_@fBoA`GKd@y@xDKb@Kb@cA|EADI\\\\cAvEa@tBKb@a@nBADiBxIkArFSbAKd@Kd@Mn@k@fCK`@?@u@jDCJKd@UfAk@lCu@jDq@xC[tAm@rCKd@Ib@m@rCg@zB}BzKEPgAdFGVKf@ADo@bDk@rBAFSr@Q`Ao@lDq@zCk@`CIZY`AoAxDGPGNs@jBs@~AOZCB_AjBy@zAoE|GkAhBU^S\\\\k@|@GFkDhFiE~Gm@|@MN_BdC}DfGk@z@GJqChEU^]h@sChE]h@iFdIIJKNYf@{A|ByA|BcAzA]h@eBfCEHCBINyAbC_BbCuBfDg@r@UZoCdEsBzCU^w@lAcGjJU^iAfBg@r@e@l@uD`G{BlDkAfB}BnD}@zA{BdDSRMPC@_CtDkAfB{AzB_AvA]l@e@t@[b@kGpJcKzO_HnKEDOVEFe@t@U\\\\W^wAxB{Uv^QVU\\\\yJjOe@r@qDtFsD|FeCtD_@j@mE`H}CtE{EpHoDrFW^cCtDU^{HtLoAnBaBbCcBfCKNmDtFoDrFq@dAcBfCy@tAwEfHOTQVsChEsB~C{DdGcA|Aa@r@mKdPoDrF{CtEmKfPkExGyFxIsFnIuCpE_HhKKPSXaEfGGJ?@IJ[h@aAxAaAxA}A~BwCtEu@fAkAjBeCtD}DdGCBINQX{CxEeErGk@|@IL{CxEqBxCmBtCW`@U\\\\U\\\\eCvDqClEwDzF}@rAsB`DeDdFuB`DCB{EpHmCxDU\\\\MNIJONIHUVYZo@n@QPWRWR]X}@r@QLUPMHMJMJ_@X_An@GDGF_An@kAz@uA`AKHOLOLGFUVc@f@QTORILSX]l@U`@S^Wj@MZQd@M^Of@Mf@Ox@GXG^G`@C^K|@KhAKbAOhBK`AGh@Ed@Ip@C\\\\G\\\\Il@Id@If@WjAQr@M^ENM\\\\Yt@OZYr@a@t@S`@U^qClE}EnHoB|CuCnEi@x@uAxBOTeDdF_CnDaAzAU\\\\aAzAqCjE_AxAu@hAQViBrCcEnGmAfBcDdFs@fAq@dAc@p@QV?@OViBpCOT_BbCw@nAaD~Es@hAc@n@aFvH}IfNgHvK_FxHeJlNoDtFU\\\\aAzAi@v@kAjBkBtCaCtDwAxBuAtBeBhCS\\\\EDcBfCINILe@r@iAbBq@dA}CvEa@r@yD|FoBjDILQ\\\\S\\\\ILk@bAo@hAmArBQVU^GLuBrDKRQZ}AbCkBzCEHGHKNuCnEgEpG}AfCkC~D}@vA}@tASZi@z@INCDCDqBzCCDg@t@U^KNeErGw@hAU\\\\eA~AA@{@pAEFCDEHABu@fAEDqCpEeA~AcA~AwA|BuDtFILILSZU\\\\SZA@mCdE[d@gAbBw@nAi@x@oAlBU\\\\kC`EABi@x@q@~@yA~BqArBk@x@i@z@g@x@i@x@i@x@]d@MVaAzA_AtAEJiBvCoBrCiAbBeAxAi@z@KL}@|Aq@bAYf@o@z@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -22.5012347,\r\n                                \"lng\": -47.4031847\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.6 km\",\r\n                                \"value\": 624\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 39\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -21.8184367,\r\n                                \"lng\": -48.1774155\r\n                            },\r\n                            \"html_instructions\": \"Take exit <b>271</b> toward <b>Araraquara</b>/<wbr/><b>Rib. Preto</b>/<wbr/><b>Bauru</b>\",\r\n                            \"maneuver\": \"ramp-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"|cedChx_eHSNSXYd@e@t@[d@Yf@GHOR[d@c@j@UXw@bAy@dA[^kAxAw@bAw@bAOPGDGBa@b@QPQLQLQJQJC@\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -21.8222333,\r\n                                \"lng\": -48.173012\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.7 km\",\r\n                                \"value\": 694\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 56\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -21.8124456,\r\n                                \"lng\": -48.1776006\r\n                            },\r\n                            \"html_instructions\": \"At the roundabout, take the <b>2nd</b> exit onto <b>R. Domingos Zanin</b>\",\r\n                            \"maneuver\": \"roundabout-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"flddCzs`eHa@FSDUHUHUHWHUJUJSLULKNC@ORe@HY@e@@c@?SA{ACeBAcFc@gD[c@Ec@Ea@EOAKEGAME_@O\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -21.8184367,\r\n                                \"lng\": -48.1774155\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.2 km\",\r\n                                \"value\": 154\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 13\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -21.811086,\r\n                                \"lng\": -48.1773928\r\n                            },\r\n                            \"html_instructions\": \"At the roundabout, take the <b>2nd</b> exit and stay on <b>R. Domingos Zanin</b>\",\r\n                            \"maneuver\": \"roundabout-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"xfcdC~t`eHCAAACACACAEAC?EAE?C?C?[BU?UAWAUAUE[E[ECAWE\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -21.8124456,\r\n                                \"lng\": -48.1776006\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.3 km\",\r\n                                \"value\": 285\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"1 min\",\r\n                                \"value\": 21\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -21.8091986,\r\n                                \"lng\": -48.1756628\r\n                            },\r\n                            \"html_instructions\": \"Keep <b>right</b>\",\r\n                            \"maneuver\": \"keep-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"h~bdCts`eH[I[G[KOCOCOGMGMGMIKKc@q@GKk@{@m@}@m@{@KQ\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -21.811086,\r\n                                \"lng\": -48.1773928\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"3.7 km\",\r\n                                \"value\": 3666\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"6 mins\",\r\n                                \"value\": 370\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -21.7786378,\r\n                                \"lng\": -48.1693163\r\n                            },\r\n                            \"html_instructions\": \"Continue onto <b>Av. Maria Antonia Camargo de Oliveira</b><div style=\\\"font-size:0.9em\\\">Pass by Odontologia Vallerini (on the right in 1.7&nbsp;km)</div>\",\r\n                            \"polyline\": {\r\n                                \"points\": \"nrbdCzh`eHWa@Ua@MQc@s@e@s@g@o@MWSYQ[MQKOiB{CQYQYSUSWUUUUOIKEYM[M]KMFGBe@Hq@HA?uAR[HgBb@}@T_AT_@FYH]FYDWB[@W@_@@_@AcCDk@?g@AOAE?GBEBk@DO@U@G@I?W@U?UAE?oFY_GKkAE]EMCIEIESKMGo@CeAAW?kAKOAm@E_@E[Ac@C[CG?m@EMAMAK?M?O@A?OBS@[BG?IAIAICOGEAEAA?MAK?K@M@E?c@BAAAA?AA?AAA?AAA?A??AA?A?A?A?A??@A?A?A??@A?A?A@A@A@o@SA?WGKCMAm@AwB?e@?cACw@CsACcBEu@Au@Au@?yA@oE@wB?}@?I@c@?eA?IAI?C?C?C?E?k@@_@@g@@i@?Y?Y?UAC?YA[CYCYEyAWaGsAUGSGa@SSMSKGACAE?GGKEICICEAC?CAC?ECECGCKAk@OOCQGQIeCsAiGeDs@g@KEGEGAICI?\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -21.8091986,\r\n                                \"lng\": -48.1756628\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.7 km\",\r\n                                \"value\": 704\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"2 mins\",\r\n                                \"value\": 109\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -21.7743632,\r\n                                \"lng\": -48.17406829999999\r\n                            },\r\n                            \"html_instructions\": \"At the roundabout, take the <b>2nd</b> exit onto <b>Alameda Rogerio Pinto Ferraz</b>\",\r\n                            \"maneuver\": \"roundabout-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"ns|cCfa_eHAA?A?AAAAAAAAAA??AA?A?AAA?A?A?A?A?A??@A?A?A@A??@A??@A??@A@A@?@?@?@A??@?@?@?@?@?@@@?@?@@@aBbC{@bAEDo@r@{BdCKJ{@dA_BlBABILeAnAs@v@YZKJGH}@bAaAfA\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -21.7786378,\r\n                                \"lng\": -48.1693163\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        },\r\n                        {\r\n                            \"distance\": {\r\n                                \"text\": \"0.8 km\",\r\n                                \"value\": 814\r\n                            },\r\n                            \"duration\": {\r\n                                \"text\": \"2 mins\",\r\n                                \"value\": 122\r\n                            },\r\n                            \"end_location\": {\r\n                                \"lat\": -21.7790843,\r\n                                \"lng\": -48.1792643\r\n                            },\r\n                            \"html_instructions\": \"At the roundabout, take the <b>3rd</b> exit onto <b>Av. Bento de Abreu</b>\",\r\n                            \"maneuver\": \"roundabout-right\",\r\n                            \"polyline\": {\r\n                                \"points\": \"vx{cC|~_eHAAAAC?A?CAA?C?A?C@C?C@A@C@A@C@ABA@ABABAB?BAB?B?B?B?B@B?@@BBD?@@@@@@@@??@@@@?B@B@@@B?B?B?B?B?DABBB@B@BBDBB@r@r@b@b@^`@JJ\\\\\\\\^`@`@^\\\\\\\\JJ`@d@b@`@j@l@x@~@VVJHh@d@NPRRj@p@d@`@f@h@f@j@p@t@BBJLb@^?@x@t@\\\\\\\\DFDF\"\r\n                            },\r\n                            \"start_location\": {\r\n                                \"lat\": -21.7743632,\r\n                                \"lng\": -48.17406829999999\r\n                            },\r\n                            \"travel_mode\": \"DRIVING\"\r\n                        }\r\n                    ],\r\n                    \"traffic_speed_entry\": [],\r\n                    \"via_waypoint\": [\r\n                        {\r\n                            \"location\": {\r\n                                \"lat\": -23.5613717,\r\n                                \"lng\": -46.67026269999999\r\n                            },\r\n                            \"step_index\": 12,\r\n                            \"step_interpolation\": 0.9418176109792341\r\n                        }\r\n                    ]\r\n                }\r\n            ],\r\n            \"overview_polyline\": {\r\n                \"points\": \"nvwnCfht{GeF|[mRvJ_M`BmKqBpA~NhYzx@v_@nr@nB{DhIvI`GlGlA|D}BnCfElAzA`FbFlFRzGeCtFvDpFxCpG`Szd@|KbWzJrf@|An`@yE~Hgm@rPeQ~LeLdVeZhx@ef@jkA}]tc@yo@|u@}OfK{l@VuXaGoIkH_Eu[Qsy@sQ}`@iG}NoQeNwMwBk_@z\\\\sz@vl@ye@v\\\\sc@rDoVbKiQn`@cX`TwyAx\\\\qr@xIyv@nOa^lMud@~Awe@dDqf@~U{WjJs_@lCsfCdIm_@~I}LnN_^h_@c`@zRao@pReLjLeNbe@eRnZeGhw@oEnSaN~Q_[x[qThS}h@~LmtAtAsSdAuPvLcTnp@mMfN_b@zYgh@xFe]z\\\\wu@hHo]tJql@fl@kf@xs@ip@d[acAtfAil@hp@gvCjdEqZbU{d@pOedBja@uoAp^c_Arz@s`ArbA_g@ll@_l@rfAms@zT{n@ro@cf@pk@a[|l@{gA|}@cc@jWi^`Iwb@bZouA~t@ueAdkAkf@dh@cy@~eAmZhk@gyApm@k`@vZqx@peAkd@zf@ib@l]ga@hk@}b@~F{o@lBo{@ja@yu@vj@}~@`GogAhCarAtU_v@~]i`@vHim@n@ko@qF}i@mR{m@gKms@~Ci\\\\dDkVhRiw@z_Bki@baAoeA~eAk|@raAss@~`Bi^zw@er@jx@oZpWol@dWc}Bx~@ctAz~AkrB`xBu^vy@{^h}@qRxMgeAhUsi@fOwd@p]aw@jl@yc@pD_pAKu\\\\pHm{Avy@omBnk@{aDhsCiXxe@eU~PwtAp_@ckAMshBuEe`@hI{PvJomAdu@oxAh|@oy@tb@{w@vUwp@~LyHaCnBmGpHz@iCbYad@l|Bwd@j}BqjAr}F}e@j|Bmu@~_CoEdhA}YxiA}s@vjAgn@vh@cp@|[kzAjm@eeAju@q|@~s@mfAngAg_BrfByt@nz@_Zrk@kRh^gf@l^i^|Fqc@mAsQ~E}u@|ZgTy@a[vP{[vViH|SmWfJcb@lJ{j@f\\\\ii@|Lsq@dc@eKvL_CdRdCjXkGjU_PlNiSzY{UrH_i@kBmo@sAwZvIgUpWil@lbBso@~jB}u@xyBeJnO_[xOaqAnb@_cH`bC}oA|d@saAli@{iAbo@weHf|DotBpiAs~@fc@gbDu[m[|@iZrSw`AnqAqX~^eOna@ga@ljByjA|pFadAtxEyyKtzPe|Al_C_Z~VkL~j@yhApgBg_Dx_FucB~iCoZnZy_@w@kI}@qImKqL{PaRpBkg@i@oT}@yo@m@yYaFqRmJsY`]|\\\\r_@\"\r\n            },\r\n            \"summary\": \"Rod. dos Bandeirantes and BR-364\",\r\n            \"warnings\": [],\r\n            \"waypoint_order\": []\r\n        }\r\n    ]  \r\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/toll/v1/directions?vehicleType=TRUCK_WITH_THREE_DOUBLE_AXLES",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"toll",
-								"v1",
-								"directions"
-							],
-							"query": [
-								{
-									"key": "vehicleType",
-									"value": "TRUCK_WITH_THREE_DOUBLE_AXLES"
 								}
 							]
 						}
@@ -1493,9 +1539,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1509,50 +1554,6 @@
 							],
 							"path": [
 								"freight",
-								"v1",
-								"calculations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "CO2",
-			"item": [
-				{
-					"name": "calculateEmission",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{currentAccessToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"source\": \"GHG_PROTOCOL\",\r\n    \"fuelType\": \"GASOLINE\",\r\n    \"totalDistance\": 95610,\r\n    \"autonomy\": 5.6,\r\n    \"fuelPrice\": 6.94,\r\n    \"fractionedEmissions\": [\r\n        {\r\n            \"name\": \"Cliente\",\r\n            \"percentage\": 20\r\n        },\r\n        {\r\n            \"name\": \"Transportador\",\r\n            \"percentage\": 80\r\n        }\r\n    ]\r\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/emission/v1/calculations",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"emission",
 								"v1",
 								"calculations"
 							]
@@ -1836,11 +1837,8 @@
 								},
 								"url": {
 									"raw": "{{baseUrl}}/tracking/v1/orders/{{trackingId}}",
-									"protocol": "https",
 									"host": [
-										"api",
-										"maplink",
-										"global"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"tracking",
@@ -1878,11 +1876,8 @@
 								},
 								"url": {
 									"raw": "{{baseUrl}}/tracking/v1/orders/{{trackingId}}",
-									"protocol": "https",
 									"host": [
-										"api",
-										"maplink",
-										"global"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"tracking",
@@ -2053,7 +2048,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"77\",\r\n    \"active\": true,\r\n    \"name\": \"Restaurante Dummy\",\r\n    \"category\": \"ALIMENTOS_E_BEBIDAS\",\r\n    \"subCategory\": \"RESTAURANTES\",\r\n    \"address\": {\r\n        \"street\": \"Praça Tiradentes\",\r\n        \"number\": \"23\",\r\n        \"city\": \"Rio de Janeiro\",\r\n        \"state\": \"RJ\",\r\n        \"zipcode\": \"20060-070\",\r\n        \"point\": {\r\n            \"latitude\": -22.90741716416432,\r\n            \"longitude\": -43.182738139927416\r\n        }\r\n    },\r\n    \"phones\": [\r\n        \"(21) 91234-5678\"\r\n    ],\r\n    \"clientId\": \"qBPERsYpGuBp9ksxA1EGncIYlVM8ULee\",\r\n    \"tags\": [\r\n        \"Restaurante\",\r\n        \"Comida\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id\": \"4321\",\r\n    \"name\": \"Dummy Restaurant\",\r\n    \"category\": \"ALIMENTOS_E_BEBIDAS\",\r\n    \"subCategory\": \"RESTAURANTES\",\r\n    \"address\": {\r\n        \"street\": \"Praça Tiradentes\",\r\n        \"number\": \"23\",\r\n        \"city\": \"Rio de Janeiro\",\r\n        \"state\": \"RJ\",\r\n        \"zipcode\": \"20060-070\",\r\n        \"point\": {\r\n            \"latitude\": -22.90741716416432,\r\n            \"longitude\": -43.182738139927416\r\n        }\r\n    },\r\n    \"phones\": [\r\n        \"(21) 91234-5678\"\r\n    ],\r\n    \"tags\": [\r\n        \"Self-Service Restaurant\"\r\n    ],\r\n    \"additionalInfo\": {\r\n        \"OpenOnWeekends\": \"Yes\",\r\n        \"SmokingArea\": \"Yes\"\r\n    },\r\n    \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2456,7 +2451,6 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
 								"value": "application/x-www-form-urlencoded",
 								"type": "text"
 							}
